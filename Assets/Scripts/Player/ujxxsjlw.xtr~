@@ -1,0 +1,64 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Jump : MonoBehaviour
+{
+    private PlayerRoot player;
+    private bool jumpRequest;
+    [SerializeField] private float jumpVelocity;
+
+    [SerializeField] private float fallMultiplier = 2.5f;
+    [SerializeField] private float lowJumpMultiplier = 2f;
+    [SerializeField] private float coyoteTime;
+    private float coyotetimeCounter;
+
+    private void Start()
+    {
+        player = GetComponent<PlayerRoot>();
+    }
+
+    private void Update()
+    {
+        if (player.isGrounded)
+        {
+            coyotetimeCounter = coyoteTime;
+        } else
+        {
+            coyotetimeCounter -= Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Jump") && coyoteTime > 0)
+        {
+            jumpRequest = true;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (jumpRequest)
+        {
+            OnJump();
+            jumpRequest = false;
+            coyotetimeCounter = 0f;
+        }
+        BetterJump();
+    }
+
+    private void OnJump()
+    {
+        player.rb.velocity = new Vector2(player.rb.velocity.x, jumpVelocity);
+    }
+
+    private void BetterJump()
+    {
+        if (player.rb.velocity.y < 0)
+        {
+            player.rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (player.rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            player.rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+    }
+}

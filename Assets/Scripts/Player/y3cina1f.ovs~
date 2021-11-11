@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Jump : MonoBehaviour
+{
+    private PlayerRoot player;
+    [SerializeField] private float speed;
+
+
+    private void Start()
+    {
+        player = GetComponent<PlayerRoot>();
+    }
+
+    private void FixedUpdate()
+    {
+        if(player.isGrounded && Input.GetButtonDown("Jump"){
+
+        }
+    }
+}

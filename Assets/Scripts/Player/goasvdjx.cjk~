@@ -1,0 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Jump : MonoBehaviour
+{
+    private PlayerRoot player;
+    [SerializeField] private float jumpForce;
+    private bool jumpRequest;
+
+
+    private void Start()
+    {
+        player = GetComponent<PlayerRoot>();
+    }
+
+    private void Update()
+    {
+        
+    }
+
+    private void FixedUpdate()
+    {
+        if(player.isGrounded && Input.GetButtonDown("Jump")){
+            player.rb.velocity = Vector2.up * jumpForce;
+        }
+    }
+}

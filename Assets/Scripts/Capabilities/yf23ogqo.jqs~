@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Jump : MonoBehaviour
+{
+    [SerializeField] private InputController input;
+    [SerializeField] private float jumpHeight;
+    [SerializeField] private int maxAirJumps = 0;
+    [SerializeField] private float upwardMovementMultiplier = 3f;
+    [SerializeField] private float downwardMovementMultiplier = 3f;
+
+    private Rigidbody2D rb;
+    private Ground ground;
+    private Vector2 velocity;
+
+    private int jumpPhase;
+    private float defaultGravityScale;
+    private bool desiredJump;
+    private bool onGround;
+
+    private void Awake()
+    {
+        
+    }
+}

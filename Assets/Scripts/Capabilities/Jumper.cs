@@ -1,0 +1,76 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Jumper : MonoBehaviour
+{
+    [SerializeField] private InputController input;
+    [SerializeField] private float jumpHeight;
+    [SerializeField] private int maxAirJumps = 0;
+    [SerializeField] private float upwardMovementMultiplier = 3f;
+    [SerializeField] private float downwardMovementMultiplier = 3f;
+
+    private Rigidbody2D rb;
+    private Ground ground;
+    private Vector2 velocity;
+
+    private int jumpPhase;
+    private float defaultGravityScale;
+    private bool desiredJump;
+    private bool onGround;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        ground = GetComponent<Ground>();
+
+        defaultGravityScale = 1f;
+    }
+
+    private void Update()
+    {
+        desiredJump |= input.RetrieveJumpInput();
+    }
+
+    private void FixedUpdate()
+    {
+        onGround = ground.getOnGround();
+        velocity = rb.velocity;
+        if (onGround)
+        {
+            jumpPhase = 0;
+        }
+        if (desiredJump)
+        {
+            desiredJump = false;
+            JumpAction();
+        }
+        if(rb.velocity.y > 0)
+        {
+            rb.gravityScale =upwardMovementMultiplier;
+        } else if(rb.velocity.y < 0)
+        {
+            rb.gravityScale = downwardMovementMultiplier;
+        } else if(rb.velocity.y == 0)
+        {
+            rb.gravityScale = defaultGravityScale;
+        }
+        rb.velocity = velocity;
+    }
+
+
+    private void JumpAction()
+    {
+        if(onGround || jumpPhase < maxAirJumps)
+        {
+            jumpPhase += 1;
+            float jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight);
+            if(velocity.y > 0)
+            {
+                jumpSpeed = Mathf.Max(jumpSpeed - velocity.y, 0f);
+            }
+            velocity.y += jumpSpeed;
+
+        }
+    }
+}

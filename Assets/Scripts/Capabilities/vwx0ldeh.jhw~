@@ -1,0 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Jump : MonoBehaviour
+{
+    [SerializeField] private InputController input;
+    [SerializeField] private float jumpHeight;
+    [SerializeField] private int maxAirJumps = 0;
+    [SerializeField] private float upwardMovementMultiplier = 3f;
+    [SerializeField] private float downwardMovementMultiplier = 3f;
+
+    private Rigidbody rb;
+}
