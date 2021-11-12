@@ -7,6 +7,12 @@ using UnityEngine;
 
 public class AiController : InputController
 {
+    
+    public float health;
+    public bool canJump;
+    public float speed;
+    public float attackDamage;
+    public float detectionRange;
     public override bool RetrieveJumpInput()
     {
         return true;
