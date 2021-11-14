@@ -65,7 +65,8 @@
     <Compile Include="Assets\Scripts\Controllers\AiController.cs" />
     <Compile Include="Assets\Scripts\Player\Monitor.cs" />
     <Compile Include="Assets\Scripts\Player\HorizontalMove.cs" />
-    <Compile Include="Assets\Scripts\AI\Enemy\Grog\Grog.cs" />
+    <Compile Include="Assets\Scripts\AI\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripts\AI\Enemy\MoveData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
