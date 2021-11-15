@@ -1,0 +1,55 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Jumper : MonoBehaviour
+{
+    [SerializeField] private InputController input;
+    [SerializeField] private float jumpHeight;
+    [SerializeField] private int maxAirJumps = 0;
+    [SerializeField] private float fallMultiplier = 3f;
+    [SerializeField] private float lowFallMultiplier = 3f;
+
+    private Rigidbody2D rb;
+    private Ground ground;
+    private Vector2 velocity;
+
+    private int jumpPhase;
+    private float defaultGravityScale;
+    private bool desiredJump;
+    private bool onGround;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        ground = GetComponent<Ground>();
+
+        defaultGravityScale = 1f;
+    }
+
+    private void Update()
+    {
+        desiredJump |= input.RetrieveJumpInput() && jumpPhase <= maxAirJumps;
+    }
+
+    private void FixedUpdate()
+    {
+        onGround = ground.getOnGround();
+
+        if (onGround)
+        {
+            jumpPhase = 0;
+        }
+
+        if (desiredJump)
+        {
+            JumpAction()
+        }
+    }
+
+    private void JumpAction()
+    {
+        jumpPhase += 1;
+    }
+}
