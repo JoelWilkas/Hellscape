@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,10 @@ public class Move : MonoBehaviour
     private float acceleration;
     private bool onGround;
 
+    public Animator animator;
+
+    private bool cameraLeft = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,7 +34,18 @@ public class Move : MonoBehaviour
     {
         dir.x = input.RetrieveMoveInput();
         desiredVelocity = new Vector2(dir.x, 0f) * Mathf.Max(maxSpeed - ground.getFriction(), 0f);
+
+
+        if(dir.x > 0)
+        {
+            animator.Play("Right Camera");
+        } 
+        else if (dir.x < 0)
+        {
+            animator.Play("Left Camera");
+        }
     }
+
 
     private void FixedUpdate()
     {
