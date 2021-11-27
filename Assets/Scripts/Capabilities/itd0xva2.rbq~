@@ -1,0 +1,57 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Move : MonoBehaviour
+{
+    [SerializeField] private InputController input = null;
+    [SerializeField] private float maxSpeed = 4f;
+    [SerializeField] private float movmentSmoothing = 0.2f;
+
+    private Vector2 dir;
+    private Vector2 desiredVelocity;
+    private Vector2 velocity;
+    private Rigidbody2D rb;
+    private Ground ground;
+
+    private float MaxSpeedChange;
+    private float acceleration;
+    private bool onGround;
+
+    public Animator animator;
+
+    private bool cameraLeft = false;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        ground = GetComponent<Ground>();
+    }
+
+    private void Update()
+    {
+        dir.x = input.RetrieveMoveInput();
+        desiredVelocity = new Vector2(dir.x, 0f) * Mathf.Max(maxSpeed - ground.getFriction(), 0f);
+
+
+        if(dir.x > 0)
+        {
+            animator.Play("Right Camera");
+        } 
+        else if (dir.x < 0)
+        {
+            animator.Play("Left Camera");
+        }
+    }
+
+
+    private void FixedUpdate()
+    {
+        onGround = ground.getOnGround();
+
+        Vector2 targetVelocity = new Vector2(dir.x * maxSpeed, rb.velocity.y);
+
+        rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movmentSmoothing);
+    }
+}

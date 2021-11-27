@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Movement : MonoBehaviour
+{
+    [Header("Components")]
+    private Player player;
+    private PlayerInput input;
+
+    private InputAction movement;
+
+    
+
+
+    private void Start()
+    {
+        input = new PlayerInput();
+        player = GetComponent<Player>();
+        
+    }
+
+    private void Awake()
+    {
+        input.Enable();
+        movement = input.Movement.Horizontal;
+        movement.performed += Movement_performed;
+    }
+
+    private void OnEnable()
+    {
+        input.Disable();
+    }
+
+    private void Movement_performed(InputAction.CallbackContext ctx)
+    {
+
+    }
+}

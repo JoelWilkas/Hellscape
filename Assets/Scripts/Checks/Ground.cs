@@ -4,53 +4,29 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour
 {
-    private bool onGround;
-    private float friction;
+
+    [Header("Components")]
+    private Player player;
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    [Header("Variables")]
+    [SerializeField] private float rayCastLength;
+    [SerializeField] private LayerMask groundLayer;
+
+    private void Start()
     {
-        EvaluateCollision(collision);
-        RetrieveFriction(collision);
-    }
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        EvaluateCollision(collision);
-        RetrieveFriction(collision);
+        player = GetComponent<Player>();
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void Update()
     {
-        onGround = false;
-        friction = 0;
+        player.onGround = Physics2D.Raycast(transform.position, Vector2.down, rayCastLength, groundLayer);
     }
 
-
-    private void EvaluateCollision(Collision2D collision)
+    private void OnDrawGizmos()
     {
-        for(int i = 0; i < collision.contactCount; i++)
-        {
-            Vector2 normal = collision.GetContact(i).normal;
-            onGround |= normal.y >= 0.9f;
-        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * rayCastLength);
     }
 
-    private void RetrieveFriction(Collision2D collision)
-    {
-        PhysicsMaterial2D material = collision.rigidbody.sharedMaterial;
-        friction = 0;
-
-        if(material != null)
-        {
-            friction = material.friction;
-        }
-    }
-    public bool getOnGround()
-    {
-        return onGround;
-    }
-    public float getFriction()
-    {
-        return friction;
-    }
 }

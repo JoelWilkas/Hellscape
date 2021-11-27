@@ -1,0 +1,128 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Movement : MonoBehaviour
+{
+    public PlayerStateList pState;
+
+    [Header("X Axis Movement")]
+    [SerializeField] float walkSpeed = 25f;
+
+    [Space(5)]
+
+    [Header("Y Axis Movement")]
+    [SerializeField] float jumpSpeed = 45;
+    [SerializeField] float fallSpeed = 45;
+    [SerializeField] int jumpSteps = 20;
+    [SerializeField] int jumpThreshold = 7;
+
+    [Space(5)]
+
+    [Header("Ground Checking")]
+    [SerializeField] Transform groundTransform; //This is supposed to be a transform childed to the player just under their collider.
+    [SerializeField] float groundCheckY = 0.2f; //How far on the Y axis the groundcheck Raycast goes.
+    [SerializeField] float groundCheckX = 1;//Same as above but for X.
+    [SerializeField] LayerMask groundLayer;
+
+    [Space(5)]
+
+    [SerializeField] Transform roofTransform; //This is supposed to be a transform childed to the player just above their collider.
+    [SerializeField] float roofCheckY = 0.2f;
+    [SerializeField] float roofCheckX = 1; // You probably want this to be the same as groundCheckX
+
+
+    float xAxis;
+    float yAxis;
+    int stepsJumped = 0;
+    float gravity;
+
+    Rigidbody2D rb;
+
+    void Start()
+    {
+        if (pState == null)
+        {
+            pState = GetComponent<PlayerStateList>();
+        }
+
+        rb = GetComponent<Rigidbody2D>();
+
+        gravity = rb.gravityScale;
+    }
+
+    private void Update()
+    {
+
+    }
+
+    void Jump()
+    {
+        if (pState.jumping)
+        {
+
+            if (stepsJumped < jumpSteps && !Roofed())
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                stepsJumped++;
+            }
+            else
+            {
+                StopJumpSlow();
+            }
+        }
+
+        //This limits how fast the player can fall
+        //Since platformers generally have increased gravity, you don't want them to fall so fast they clip trough all the floors.
+        if (rb.velocity.y < -Mathf.Abs(fallSpeed))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -Mathf.Abs(fallSpeed), Mathf.Infinity));
+        }
+    }
+
+
+    void Walk(float MoveDirection)
+    {
+        //Rigidbody2D rigidbody2D = rb;
+        //float x = MoveDirection * walkSpeed;
+        //Vector2 velocity = rb.velocity;
+        //rigidbody2D.velocity = new Vector2(x, velocity.y);
+        if (!pState.recoilingX)
+        {
+            rb.velocity = new Vector2(MoveDirection * walkSpeed, rb.velocity.y);
+
+            if (Mathf.Abs(rb.velocity.x) > 0)
+            {
+                pState.walking = true;
+            }
+            else
+            {
+                pState.walking = false;
+            }
+            if (xAxis > 0)
+            {
+                pState.lookingRight = true;
+            }
+            else if (xAxis < 0)
+            {
+                pState.lookingRight = false;
+            }
+
+            //anim.SetBool("Walking", pState.walking);
+        }
+
+    }
+
+    void Flip()
+    {
+        if (xAxis > 0)
+        {
+            transform.localScale = new Vector2(1, transform.localScale.y);
+        }
+        else if (xAxis < 0)
+        {
+            transform.localScale = new Vector2(-1, transform.localScale.y);
+        }
+    }
+
+}

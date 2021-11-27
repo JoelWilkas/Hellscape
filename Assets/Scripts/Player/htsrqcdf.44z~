@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Movement : MonoBehaviour
+{
+    [Header("Components")]
+    private Player player;
+    private PlayerInput input;
+
+    
+
+
+    private void Start()
+    {
+        input = new PlayerInput();
+        
+    }
+
+    private void Awake()
+    {
+        
+    }
+
+    private void OnEnable()
+    {
+        
+    }
+}

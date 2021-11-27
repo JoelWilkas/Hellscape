@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Movement : MonoBehaviour
+{
+    public PlayerStateList pState;
+
+    [Header("X Axis Movement")]
+    [SerializeField] float walkSpeed = 25f;
+
+    [Space(5)]
+
+    [Header("Y Axis Movement")]
+    [SerializeField] float jumpSpeed = 45;
+    [SerializeField] float fallSpeed = 45;
+    [SerializeField] int jumpSteps = 20;
+    [SerializeField] int jumpThreshold = 7;
+
+    [Space(5)]
+
+    [Header("Ground Checking")]
+    [SerializeField] Transform groundTransform; //This is supposed to be a transform childed to the player just under their collider.
+    [SerializeField] float groundCheckY = 0.2f; //How far on the Y axis the groundcheck Raycast goes.
+    [SerializeField] float groundCheckX = 1;//Same as above but for X.
+    [SerializeField] LayerMask groundLayer;
+
+    [Space(5)]
+
+    [SerializeField] Transform roofTransform; //This is supposed to be a transform childed to the player just above their collider.
+    [SerializeField] float roofCheckY = 0.2f;
+    [SerializeField] float roofCheckX = 1; // You probably want this to be the same as groundCheckX
+
+
+    float xAxis;
+    float yAxis;
+    int stepsJumped = 0;
+    float gravity;
+
+}

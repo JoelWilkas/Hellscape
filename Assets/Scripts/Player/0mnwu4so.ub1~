@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class InputManager : MonoBehaviour
+{
+    public PlayerInput input { get; private set; }
+    public InputAction movement { get; private set; }
+
+    public Vector2 dir { get; private set; }
+
+    //private void Awake()
+    //{
+    //    input = new PlayerInput();
+    //}
+
+    private void Update()
+    {
+        //movement = input.Movement.Horizontal;
+        //movement.performed += ctx => dir = ctx.ReadValue<Vector2>();
+        //Debug.Log(dir.ToString());
+    }
+
+    //private void OnEnable()
+    //{
+    //    movement.Enable();
+    //    input.Enable();
+    //}
+
+    //private void OnDisable()
+    //{
+    //    movement.Disable();
+    //    input.Disable();
+    //}
+    public void Move(InputAction.CallbackContext ctx)
+    {
+        dir = ctx.ReadValue<Vector2>();
+    }
+}

@@ -1,0 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Ground : MonoBehaviour
+{
+
+    [Header("Components")]
+    private Player player;
+
+
+    [Header("Variables")]
+    [SerializeField] private float rayCastLength;
+
+    private void Start()
+    {
+        player = GetComponent<Player>();
+    }
+
+}

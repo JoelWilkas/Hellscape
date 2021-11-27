@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Movement : MonoBehaviour
+{
+
+    [Header("Components")]
+    private Player player;
+   
+    private InputHandler input;
+    [SerializeField] private float smoothTime;
+    [SerializeField] private float maxSpeed;
+    private Rigidbody2D rb;
+    private Vector2 velocity = Vector2.zero;
+    private Vector2 targetVelocity = Vector2.zero;
+
+
+    private void Awake()
+    {
+        player = GetComponent<Player>():
+        rb = GetComponent<Rigidbody2D>();
+        input = GetComponent<InputHandler>();
+    }
+
+    private void Update()
+    {
+        targetVelocity = new Vector2(maxSpeed * input.movement.ReadValue<Vector2>().x, rb.velocity.y);
+    }
+
+    private void FixedUpdate()
+    {
+        //Debug.Log(input.dir);
+        //
+        rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, smoothTime);
+    }
+
+}

@@ -1,0 +1,71 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Jump : MonoBehaviour
+{
+    [Header("Component")]
+    private InputHandler input;
+    private Player player;
+
+    [Header("Variables")]
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float fallMultiplier;
+    [SerializeField] private float lowFallMultiplier;
+    public int maxJumps;
+
+
+    [HideInInspector] public bool jumpRequest;
+    [HideInInspector] public bool stoppedJumping;
+    [HideInInspector] public int jumps;
+
+    
+
+    private void Start()
+    {
+        player = GetComponent<Player>();
+    }
+
+
+    private void Awake()
+    {
+        input = GetComponent<InputHandler>();
+    }
+
+
+    private void Update()
+    {
+        BetterJump();
+    }
+
+    private void FixedUpdate()
+    {
+        if(jumpRequest == true)
+        {
+            jumpRequest = false;
+            jumps++;
+            DoJump();
+        }
+
+        if (player.onGround)
+        {
+            jumps = 0;
+        }
+    }
+
+    private void DoJump()
+    {
+        player.rb.velocity += Vector2.up * jumpForce;
+    }
+
+    private void BetterJump()
+    {
+        if(player.rb.velocity.y < 0)
+        {
+            player.rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        } else if(player.rb.velocity.y > 0 && stoppedJumping)
+        {
+            player.rb.velocity += Vector2.up * Physics2D.gravity.y * (lowFallMultiplier - 1) * Time.deltaTime;
+        }
+    }
+}

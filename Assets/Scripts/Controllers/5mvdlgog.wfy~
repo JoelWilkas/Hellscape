@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class InputHandler : MonoBehaviour
+{
+
+    public PlayerInput input { get; private set; }
+    //public PlayerInput input;
+    public InputAction movement;
+    public InputAction jump;
+
+    public Vector2 dir { get; private set; }
+
+    private void Awake()
+    {
+        input = new PlayerInput();
+
+        
+    }
+
+    private void OnEnable()
+    {
+        movement = input.Movement.Horizontal;
+        jump = input.Movement.Jump;
+
+        jump.performed += ctx => Debug.Log(ctx);
+
+        movement.Enable();
+        jump.Enable();
+    }
+
+    private void OnDisable()
+    {
+        movement.Disable();
+        jump.Disable();
+    }
+
+    public bool IsJumping(bool input = false)
+    {
+        return input;
+    }
+}

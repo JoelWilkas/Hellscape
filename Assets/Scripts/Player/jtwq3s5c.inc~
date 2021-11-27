@@ -1,0 +1,42 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Movement : MonoBehaviour
+{
+    [Header("Components")]
+    private Player player;
+    private PlayerInput input;
+
+    private InputAction walk;
+
+
+
+
+
+    public Vector2 dir { get; private set; }
+
+    private void Awake()
+    {
+        input = new PlayerInput();
+
+        walk = input.Movement.Horizontal;
+        walk.performed += Walk;
+        walk.Enable();
+        input.Enable();
+    }
+
+
+    private void OnDisable()
+    {
+        walk.Disable();
+        input.Disable();
+    }
+    public void Walk(InputAction.CallbackContext ctx)
+    {
+       
+    }
+
+
+}

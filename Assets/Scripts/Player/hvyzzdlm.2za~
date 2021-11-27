@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Jump : MonoBehaviour
+{
+    [Header("Component")]
+    private InputHandler input;
+
+    [Header("Variables")]
+    private float jumpForce;
+
+    public bool jumpRequest;
+
+    private void Start()
+    {
+        
+    }
+
+
+    private void Awake()
+    {
+        input = GetComponent<InputHandler>();
+        
+
+    }
+
+
+    private void Update()
+    {
+        
+    }
+
+    private void FixedUpdate()
+    {
+        if(jumpRequest == true)
+        {
+            Debug.Log("Jumping!");
+            jumpRequest = false;
+        }
+    }
+
+}

@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Movement : MonoBehaviour
+{
+    [Header("Components")]
+    private Player player;
+    private PlayerInput input;
+
+    private InputAction walk;
+
+    [Header("Variables")]
+    [SerializeField] private float moveSpeed;
+
+
+
+
+    public Vector2 dir { get; private set; }
+
+    private void Awake()
+    {
+
+        player = GetComponent<Player>();
+        input = new PlayerInput();
+
+        walk = input.Movement.Horizontal;
+        walk.performed += ctx => Walk(ctx.ReadValue<Vector2>());
+
+    }
+
+    private void OnEnable()
+    {
+
+        walk.Enable();
+        input.Enable();
+    }
+
+    private void OnDisable()
+    {
+        walk.Disable();
+        input.Disable();
+    }
+    public void Walk(Vector2 dir)
+    {
+ 
+        Debug.Log(dir.x);
+
+        player.rb.velocity = new Vector2(dir.x * moveSpeed, player.rb.velocity.y);
+    }
+
+}

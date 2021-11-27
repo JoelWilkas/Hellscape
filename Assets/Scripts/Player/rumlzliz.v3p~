@@ -1,0 +1,55 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Jump : MonoBehaviour
+{
+    [Header("Component")]
+    private InputHandler input;
+    private Player player;
+
+    [Header("Variables")]
+    [SerializeField] private float jumpForce;
+    []
+    public bool jumpRequest;
+
+    private void Start()
+    {
+        player = GetComponent<Player>();
+    }
+
+
+    private void Awake()
+    {
+        input = GetComponent<InputHandler>();
+    }
+
+
+    private void Update()
+    {
+        
+    }
+
+    private void FixedUpdate()
+    {
+        if(jumpRequest == true && player.onGround)
+        {
+            Debug.Log("Jumping!");
+            jumpRequest = false;
+            DoJump();
+        }
+
+        BetterJump();
+    }
+
+    private void DoJump()
+    {
+        player.rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        
+    }
+
+    private void BetterJump()
+    {
+
+    }
+}

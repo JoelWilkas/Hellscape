@@ -1,0 +1,65 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class InputHandler : MonoBehaviour
+{
+
+    public PlayerInput input { get; private set; }
+
+    private Player player;
+
+    public InputAction movement;
+
+    public InputAction jump;
+
+    public InputAction dash;
+
+
+    private Jump jumpScript;
+    
+
+    public Vector2 dir { get; private set; }
+
+    private void Awake()
+    {
+        player = GetComponent<Player>();
+        input = new PlayerInput();
+        jumpScript = GetComponent<Jump>();
+    }
+
+    private void OnEnable()
+    {
+        movement = input.Movement.Horizontal;
+
+        float timer = 0;
+
+        jump = input.Movement.Jump;
+
+        jump.performed += DoJump;
+
+        jump.started += ctx => 
+
+        jump.Enable();
+
+
+
+        movement.Enable();
+    }
+
+    private void OnDisable()
+    {
+        movement.Disable();
+       jump.Disable();
+    }
+
+    public void DoJump(InputAction.CallbackContext ctx)
+    {
+        if (player.onGround)
+        {
+            jumpScript.jumpRequest = true;
+        }
+        Debug.Log(ctx);
+    }
+}
