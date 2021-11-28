@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 58870993}
   - component: {fileID: 58870998}
   - component: {fileID: 58871001}
+  - component: {fileID: 58871002}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -171,7 +172,7 @@ MonoBehaviour:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 93f46ba9-a0a7-4317-940e-410a654a4dec
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -179,7 +180,7 @@ MonoBehaviour:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: ca83e464-8a5e-4b04-841b-13798689d061
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -357,6 +358,24 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &58871002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58870992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d66855c61142a734180e40e6f23f674a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashTime: 0.3
+  dashForce: 30
+  dashCooldown: 1
+  dir: {x: 0, y: 0}
+  currentDir: {x: 0, y: 0}
+  dashRequest: 0
 --- !u!1 &310928913
 GameObject:
   m_ObjectHideFlags: 0

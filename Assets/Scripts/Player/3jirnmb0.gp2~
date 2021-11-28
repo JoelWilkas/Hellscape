@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Dash : MonoBehaviour
+{
+    [Header("Components")]
+    private Player player;
+    private InputHandler input;
+
+    [Header("Variables")]
+    [SerializeField] private float dashTime;
+    private float currentDashTime;
+
+    public bool dashRequest;
+
+    private void Start()
+    {
+        
+    }
+}

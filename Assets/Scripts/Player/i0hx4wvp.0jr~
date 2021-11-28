@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Dash : MonoBehaviour
+{
+    [Header("Components")]
+    private Player player;
+    private InputHandler input;
+
+    [Header("Variables")]
+    [SerializeField] private float dashTime;
+    private float currentDashTime;
+
+    public bool dashRequest;
+
+    private void Start()
+    {
+        player = GetComponent<Player>();
+
+        currentDashTime = 0;
+    }
+
+    private void Awake()
+    {
+        input = GetComponent<InputHandler>();
+    }
+
+    private void Update()
+    {
+        
+    }
+
+    private void FixedUpdate()
+    {
+        if (dashRequest)
+        {
+            dashRequest = false;
+            DoDash();
+        }
+    }
+
+    private void DoDash()
+    {
+        if(currentDashTime <= dashTime)
+        {
+
+        }
+    }
+}

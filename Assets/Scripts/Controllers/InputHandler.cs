@@ -18,6 +18,7 @@ public class InputHandler : MonoBehaviour
 
 
     private Jump jumpScript;
+    private Dash dashScript;
     
 
     public Vector2 dir { get; private set; }
@@ -27,15 +28,18 @@ public class InputHandler : MonoBehaviour
         player = GetComponent<Player>();
         input = new PlayerInput();
         jumpScript = GetComponent<Jump>();
+        dashScript = GetComponent<Dash>();
     }
 
     private void OnEnable()
     {
+
+        //Movement
         movement = input.Movement.Horizontal;
 
-        float timer = 0;
-
+        //Jump
         jump = input.Movement.Jump;
+
 
         jump.performed += DoJump;
 
@@ -49,7 +53,14 @@ public class InputHandler : MonoBehaviour
             jumpScript.stoppedJumping = true;
         };
 
+        //Dash
+        dash = input.Movement.Dash;
+
+        dash.performed += DoDash;
+
+
         jump.Enable();
+        dash.Enable();
 
 
 
@@ -59,12 +70,19 @@ public class InputHandler : MonoBehaviour
     private void OnDisable()
     {
         movement.Disable();
-       jump.Disable();
+        jump.Disable();
+        dash.Disable();
     }
 
     public void DoJump(InputAction.CallbackContext ctx)
     {
         if(player.onGround) jumpScript.jumpRequest = true;
         //Debug.Log(ctx);
+    }
+
+    public void DoDash(InputAction.CallbackContext ctx)
+    {
+        dashScript.currentDir = dashScript.dir;
+        dashScript.dashRequest = true;
     }
 }
