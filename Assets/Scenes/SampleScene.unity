@@ -169,7 +169,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
   jump:
-    m_Name: 
+    m_Name: Jump
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 93f46ba9-a0a7-4317-940e-410a654a4dec
@@ -177,7 +177,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
   dash:
-    m_Name: 
+    m_Name: Dash
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: ca83e464-8a5e-4b04-841b-13798689d061
@@ -370,12 +370,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66855c61142a734180e40e6f23f674a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashTime: 0.3
+  dashTime: 0.2
   dashForce: 30
   dashCooldown: 1
   dir: {x: 0, y: 0}
   currentDir: {x: 0, y: 0}
   dashRequest: 0
+  canDash: 0
 --- !u!1 &310928913
 GameObject:
   m_ObjectHideFlags: 0

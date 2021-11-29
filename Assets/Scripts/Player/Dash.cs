@@ -19,7 +19,7 @@ public class Dash : MonoBehaviour
     [HideInInspector] public Vector2 currentDir;
 
     public bool dashRequest;
-
+    public bool canDash = false;
     private void Start()
     {
         player = GetComponent<Player>();
@@ -39,8 +39,9 @@ public class Dash : MonoBehaviour
 
     private void FixedUpdate()
     {
+        canDash = currentDashCooldown <= 0;
         currentDashCooldown -= Time.deltaTime;
-        if (dashRequest && currentDashCooldown <= 0)
+        if (dashRequest)
         {
             DoDash();
         }

@@ -82,7 +82,10 @@ public class InputHandler : MonoBehaviour
 
     public void DoDash(InputAction.CallbackContext ctx)
     {
-        dashScript.currentDir = dashScript.dir;
-        dashScript.dashRequest = true;
+        if (dashScript.canDash && dashScript.dir.x != 0)
+        {
+            dashScript.currentDir = dashScript.dir;
+            dashScript.dashRequest = true;
+        }
     }
 }
