@@ -62,8 +62,8 @@
     <Compile Include="Assets\Scripts\Player\Movement.cs" />
     <Compile Include="Assets\Scripts\AI\Enemy\MoveData.cs" />
     <Compile Include="Assets\Scripts\Controllers\InputHandler.cs" />
-    <Compile Include="Assets\Scripts\DamageDealer.cs" />
     <Compile Include="Assets\Scripts\Sprites\BackgroundScript.cs" />
+    <Compile Include="Assets\Scripts\DamageDealer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
