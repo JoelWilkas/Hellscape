@@ -35,16 +35,19 @@ public class Movement : MonoBehaviour
 
         targetVelocity = new Vector2(maxSpeed * dir.x, player.rb.velocity.y);
 
-        
+        Vector3 characterScale = transform.localScale;
 
         if (dir.x > 0)
         {
             animator.Play("Right Camera");
+            characterScale.x = 2f;
         }
         else if (dir.x < 0)
         {
             animator.Play("Left Camera");
+            characterScale.x = -2f;
         }
+        transform.localScale = characterScale;
 
 
 
