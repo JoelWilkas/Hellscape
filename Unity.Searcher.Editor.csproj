@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,13 +53,16 @@
     <UnityVersion>2020.3.21f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.searcher@4.3.2\Editor\Searcher\SearcherItem.cs" />
-    <Compile Include="Library\PackageCache\com.unity.searcher@4.3.2\Editor\Searcher\SearcherAdapter.cs" />
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.searcher@4.3.2\Editor\Searcher\Searcher.cs" />
+    <Compile Include="Library\PackageCache\com.unity.searcher@4.3.2\Editor\Searcher\SearcherWindow.cs" />
     <Compile Include="Library\PackageCache\com.unity.searcher@4.3.2\Editor\Searcher\SearcherControl.cs" />
     <Compile Include="Library\PackageCache\com.unity.searcher@4.3.2\Editor\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.searcher@4.3.2\Editor\Searcher\SearcherHighlighter.cs" />
-    <Compile Include="Library\PackageCache\com.unity.searcher@4.3.2\Editor\Searcher\SearcherWindow.cs" />
+    <Compile Include="Library\PackageCache\com.unity.searcher@4.3.2\Editor\Searcher\SearcherItem.cs" />
+    <Compile Include="Library\PackageCache\com.unity.searcher@4.3.2\Editor\Searcher\SearcherAdapter.cs" />
     <Compile Include="Library\PackageCache\com.unity.searcher@4.3.2\Editor\Searcher\SearcherDatabaseBase.cs" />
     <Compile Include="Library\PackageCache\com.unity.searcher@4.3.2\Editor\Searcher\SearcherDatabase.cs" />
   </ItemGroup>
@@ -313,11 +316,11 @@
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.13.5\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.NRefactory">
       <HintPath>Library\PackageCache\com.unity.render-pipelines.core@10.6.0\Editor\ShaderGenerator\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
