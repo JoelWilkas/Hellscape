@@ -18,10 +18,12 @@ public class Movement : MonoBehaviour
     private Vector2 velocity = Vector2.zero;
     private Vector2 targetVelocity = Vector2.zero;
     private Vector2 dir;
+    private Animator anim;
 
     private void Start()
     {
         player = GetComponent<Player>();
+        anim = GetComponent<Animator>();
     }
     private void Awake()
     {
@@ -36,6 +38,14 @@ public class Movement : MonoBehaviour
         targetVelocity = new Vector2(maxSpeed * dir.x, player.rb.velocity.y);
 
         Vector3 characterScale = transform.localScale;
+
+        if(Mathf.Abs(player.rb.velocity.x) > 0.2)
+        {
+            anim.SetBool("Move", true);
+        } else
+        {
+            anim.SetBool("Move", false);
+        }
 
         if (dir.x > 0)
         {
