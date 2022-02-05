@@ -9,6 +9,6 @@ public class DamageDealer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        player.DoDamage(damageDealing);
+        player.DoDamage(damageDealing, 5);
     }
 }

@@ -7,9 +7,11 @@ public class Attack : MonoBehaviour
     private Animator anim;
     [SerializeField] private float coolDownTime;
     public float currentCoolDownTime;
+    private Player player;
 
     private void Start()
     {
+        player = GetComponent<Player>();
         anim = GetComponent<Animator>();
     }
     private void Update()

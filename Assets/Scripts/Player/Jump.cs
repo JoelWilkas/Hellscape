@@ -7,6 +7,7 @@ public class Jump : MonoBehaviour
     [Header("Component")]
     private InputHandler input;
     private Player player;
+    private Animator animator;
 
     [Header("Variables")]
     [SerializeField] private float jumpForce;
@@ -22,6 +23,7 @@ public class Jump : MonoBehaviour
     private void Start()
     {
         player = GetComponent<Player>();
+        animator = GetComponent<Animator>();
     }
 
 
@@ -34,6 +36,25 @@ public class Jump : MonoBehaviour
     private void Update()
     {
         BetterJump();
+        if (animator.GetBool("Attack") == false && player.rb.velocity.y > 0.5f && !player.onGround)
+        {
+            animator.SetBool("Jump", true);
+            
+        } else if (animator.GetBool("Attack") == false && player.rb.velocity.y < -0.5f && !player.onGround)
+        {
+            animator.SetBool("Falling", true);
+        } 
+        else
+        {
+            animator.SetBool("Jump", false);
+            animator.SetBool("Falling", false);
+        }
+
+        if (player.onGround)
+        {
+            animator.SetBool("Jump", false);
+            animator.SetBool("Falling", false);
+        }
     }
 
     private void FixedUpdate()
