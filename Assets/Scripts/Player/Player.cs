@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     [Header("Components")]
     public Rigidbody2D rb;
+    [SerializeField] internal AudioManager audioManager;
 
 
     [Header("States")]
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
 
     [Header("Variables")]
     [SerializeField] internal float health;
+
 
     [Header("IFrames")]
     [SerializeField] private Color flashColor;

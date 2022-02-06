@@ -17,7 +17,6 @@ public class Jump : MonoBehaviour
 
     [HideInInspector] public bool jumpRequest;
     [HideInInspector] public bool stoppedJumping;
-
     
 
     private void Start()
@@ -70,6 +69,7 @@ public class Jump : MonoBehaviour
     private void DoJump()
     {
         player.rb.velocity += Vector2.up * jumpForce;
+        player.audioManager.Play("Jump");
     }
 
     private void BetterJump()

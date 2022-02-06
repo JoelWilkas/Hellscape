@@ -14,6 +14,16 @@ public class Roller : MonoBehaviour
     [SerializeField] private float knockBack;
     private Rigidbody2D rb;
 
+
+    [Header("IFrames")]
+    [SerializeField] private Color flashColor;
+    [SerializeField] private Color RegularColor;
+    [SerializeField] private float flashDuration;
+    [SerializeField] private int numOfFlashes;
+    [SerializeField] Collider2D triggerCollider;
+    [SerializeField] private SpriteRenderer playerSprite;
+    private bool canTakeDamage;
+
     public float degreesPerSec = 360f;
     public float dealDamage = 1f;
     private float rollSpeed;
@@ -65,7 +75,7 @@ public class Roller : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        print("Aaa");
+        StartCoroutine(FlashColor());
         rb.velocity = Vector2.zero;
         rb.AddForce(new Vector2(knockBack * -dir, 100));
         enemyStats.health -= damage;
@@ -78,5 +88,21 @@ public class Roller : MonoBehaviour
             rb.velocity = Vector2.zero;
             other.gameObject.GetComponent<Player>().DoDamage(dealDamage, dir);
         }
+    }
+
+    private IEnumerator FlashColor()
+    {
+        int temp = 0;
+        canTakeDamage = false;
+        while (temp < numOfFlashes)
+        {
+            playerSprite.color = flashColor;
+            yield return new WaitForSeconds(flashDuration);
+            playerSprite.color = RegularColor;
+            yield return new WaitForSeconds(flashDuration);
+            temp++;
+        }
+
+        canTakeDamage = true;
     }
 }

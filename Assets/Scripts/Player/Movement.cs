@@ -51,14 +51,20 @@ public class Movement : MonoBehaviour
         {
             animator.Play("Right Camera");
             characterScale.x = 2f;
+
         }
         else if (dir.x < 0)
         {
             animator.Play("Left Camera");
             characterScale.x = -2f;
+            
         }
         transform.localScale = characterScale;
 
+        if(Mathf.Abs(player.rb.velocity.x) > 1 && !player.audioManager.IsPlaying("Walk"))
+        {
+            player.audioManager.Play("Walk");
+        }
 
 
 

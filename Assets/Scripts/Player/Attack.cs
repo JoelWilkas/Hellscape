@@ -8,6 +8,7 @@ public class Attack : MonoBehaviour
     [SerializeField] private float coolDownTime;
     public float currentCoolDownTime;
     private Player player;
+    
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class Attack : MonoBehaviour
         {
             anim.SetBool("Attack", true);
             currentCoolDownTime = coolDownTime;
+            player.audioManager.Play("Attack");
         }
 
 
